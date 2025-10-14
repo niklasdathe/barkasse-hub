@@ -7,11 +7,10 @@
 
   Hardware:
     - ESP32-P4 DevKit with PoE + external Ethernet PHY (RMII)
-    - If your PoE board uses W5500 SPI instead, see notes near "W5500_SWITCH".
 
   Arduino IDE:
-    - Board: ESP32 family supporting Ethernet
-    - Libraries: ArduinoJson, PubSubClient (or AsyncMqttClient), ETH.h
+    - Board: ESP32 family supporting Ethernet - https://www.waveshare.com/product/arduino/boards-kits/esp32-p4/esp32-p4-eth.htm?sku=32088
+    - Libraries: ArduinoJson, PubSubClient, ETH.h
 */
 
 #include <Arduino.h>
@@ -37,7 +36,7 @@ static const char* TOPIC_CLUSTER = "barkasse/esp32p4-01/weather/state"; // summa
 
 // ------------------- Emulation parameters -------------
 unsigned long lastPublish = 0;
-const unsigned long PUBLISH_MS = 2000; // 2 s cadence for demo
+const unsigned long PUBLISH_MS = 2000; // 2s interval for demo
 
 // Pseudo-weather baseline
 float tC = 19.5, rh = 55.0, p = 1012.0, wind = 1.0, windDir = 180.0;
@@ -134,14 +133,10 @@ void setup() {
   delay(200);
   Serial.println("\n[Barkasse Weather Mock] Starting...");
 
-  // Start Ethernet (RMII PHY). Adjust pins/PHY type for your board if needed.
+  // Starting Ethernet (RMII PHY). Adjust pins/PHY type for your board if needed.
   // Common defaults work for many ESP32 + LAN8720 boards.
   WiFi.onEvent(WiFiEvent);
   ETH.begin(); // If your board needs explicit PHY params: ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, ETH_PHY_TYPE, ETH_CLK_MODE);
-
-  // If you use W5500 over SPI instead of RMII:
-  // #define W5500_SWITCH
-  // ... include <Ethernet.h> and initialize Ethernet.begin(mac, ip) accordingly.
 
   // Wait for Ethernet connection
   Serial.print("[ETH] Waiting for connection");
