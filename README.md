@@ -63,17 +63,15 @@ sudo systemctl enable --now auto-git-update.service barkasse-ui.service chromium
 - Chromium launches automatically in fullscreen Wayland mode.  
 - The UI is served at http://localhost:8080.  
 
-### 1.5 ESP32 Examples
+### 1.5 Implementation Examples
 
-#### 1.5.1ESP32-P4 Weather (Ethernet)
-See `example-sensor-implementations/esp32p4-weatherstation-mock`.
+- **ESP32-P4 Weather (Ethernet)** (See `example-sensor-implementations/esp32p4-weatherstation-mock`)
 
-#### 1.5.2 ESP32 WROOM Water (WiFi)
-Folder: `example-sensor-implementations/esp32-wroom-waterstation-mock`
+- **ESP32 WROOM Water (WiFi)** (See `example-sensor-implementations/esp32-wroom-waterstation-mock`)
 
-The hub UI auto-discovers and renders without code changes.
+- **(LoRa)** TODO
 
-### 1.6Extend
+### 1.6 Extend
 Add any new sensor/cluster by publishing to the topic contract. No UI edits required.
 
 ### 1.7 Maintenance
